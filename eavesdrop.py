@@ -15,6 +15,8 @@ CS 4930-002 -- Group 8
 Due: 2026-10-12
 """
 
+# import function from dh.py for revcover_secret()
+from dh import public_from
 
 def brute_force_pow(g, p, public):
     """The private key behind `public`, found by trying every exponent with pow.
@@ -26,7 +28,7 @@ def brute_force_pow(g, p, public):
 
     YOUR TASK.
     """
-    for x in range(p-1):
+    for x in range(p):
         if pow(g, x, p) == public:
             return x
 
@@ -50,9 +52,11 @@ def brute_force_running(g, p, public):
     YOUR TASK.
     """
     value = 1
-    for x in range(p-1):
+
+    for x in range(p):
         if value == public:
             return x
+        
         value = (value * g) % p
 
     return None
@@ -72,4 +76,9 @@ def recover_secret(g, p, alice_public, bob_public, search=brute_force_running):
 
     YOUR TASK.
     """
+    a = search(g, p, alice_public)
+    secret = public_from(bob_public, p, a)
+
+    return secret 
+
     raise NotImplementedError("recover_secret")
