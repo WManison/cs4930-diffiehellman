@@ -15,5 +15,60 @@
    "secret_bits": 2048,
    "seconds": 0.073
   }
+ },
+ "timing": {
+  "seed": 7,
+  "running": [
+   {
+    "bits": 16,
+    "p": 65267,
+    "private": 7466,
+    "seconds": 0.00041221378603261473,
+    "per_second": 18114387,
+    "all_keys_seconds": 0.0,
+    "correct": true
+   },
+   {
+    "bits": 20,
+    "p": 1048343,
+    "private": 65655,
+    "seconds": 0.0036068642855947735,
+    "per_second": 18203069,
+    "all_keys_seconds": 0.06,
+    "correct": true
+   },
+   {
+    "bits": 24,
+    "p": 16776899,
+    "private": 14188887,
+    "seconds": 0.8029282000006788,
+    "per_second": 17671428,
+    "all_keys_seconds": 0.95,
+    "correct": true
+   },
+   {
+    "bits": 28,
+    "p": 268435019,
+    "private": 221440166,
+    "seconds": 12.166237699999328,
+    "per_second": 18201203,
+    "all_keys_seconds": 14.75,
+    "correct": true
+   }
+  ],
+  "pow": [
+   {
+    "bits": 16,
+    "seconds": 0.0030593696970809656,
+    "ratio": 7.4,
+    "correct": true
+   },
+   {
+    "bits": 20,
+    "seconds": 0.036239066665984865,
+    "ratio": 10.0,
+    "correct": true
+   }
+  ]
  }
-} 
+}
