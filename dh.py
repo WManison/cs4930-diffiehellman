@@ -17,7 +17,6 @@ Read first: the worked example with p = 23 and g = 5, the class numbers,
 
 import secrets
 
-
 def generate_private(p):
     """A new private key: a random whole number from 2 to p - 2, inclusive.
 
@@ -31,7 +30,8 @@ def generate_private(p):
 
     YOUR TASK.
     """
-
+    x = secrets.randbelow(p-2) + 2
+    return x
 
     raise NotImplementedError("generate_private")
 
@@ -49,6 +49,8 @@ def public_from(g, p, private):
 
     YOUR TASK.
     """
+
+    
     raise NotImplementedError("public_from")
 
 
