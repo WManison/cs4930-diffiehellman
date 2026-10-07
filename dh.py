@@ -11,8 +11,8 @@ Read first: the worked example with p = 23 and g = 5, the class numbers,
     https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange#Cryptographic_explanation
 
 
-    CS 4930-002 -- Group 8
-    2026/10/12
+CS 4930-002 -- Group 8
+2026/10/12
 """
 
 import secrets
@@ -50,7 +50,8 @@ def public_from(g, p, private):
     YOUR TASK.
     """
 
-    
+    return pow(g, private, p)
+
     raise NotImplementedError("public_from")
 
 
@@ -66,4 +67,7 @@ def shared_secret(their_public, p, my_private):
 
     YOUR TASK.
     """
+
+    return pow(their_public, my_private, p)
+
     raise NotImplementedError("shared_secret")
