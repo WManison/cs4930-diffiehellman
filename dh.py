@@ -9,7 +9,13 @@ work for p = 23 and for the 2048-bit prime.
 
 Read first: the worked example with p = 23 and g = 5, the class numbers,
     https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange#Cryptographic_explanation
+
+
+    CS 4930-002 -- Group 8
+    2026/10/12
 """
+
+import secrets
 
 
 def generate_private(p):
@@ -25,6 +31,8 @@ def generate_private(p):
 
     YOUR TASK.
     """
+
+
     raise NotImplementedError("generate_private")
 
 
