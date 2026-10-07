@@ -30,7 +30,7 @@ def generate_private(p):
 
     YOUR TASK.
     """
-    x = secrets.randbelow(p-2) + 2
+    x = secrets.randbelow(p-3) + 2
     return x
 
     raise NotImplementedError("generate_private")
