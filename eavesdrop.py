@@ -10,6 +10,9 @@ shows which of the two matters.
 
 Read first: why finding x from g^x mod p is hard, and the plain search,
     https://en.wikipedia.org/wiki/Discrete_logarithm#Algorithms
+
+CS 4930-002 -- Group 8
+Due: 2026-10-12
 """
 
 

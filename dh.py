@@ -12,7 +12,7 @@ Read first: the worked example with p = 23 and g = 5, the class numbers,
 
 
 CS 4930-002 -- Group 8
-2026/10/12
+Due: 2026-10-12
 """
 
 import secrets
