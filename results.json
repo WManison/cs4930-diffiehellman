@@ -1,0 +1,19 @@
+{
+ "exchange": {
+  "toy": {
+   "g": 5,
+   "p": 23,
+   "a": 6,
+   "b": 15,
+   "A": 8,
+   "B": 19,
+   "alice_secret": 2,
+   "bob_secret": 2
+  },
+  "group14": {
+   "agree": true,
+   "secret_bits": 2048,
+   "seconds": 0.073
+  }
+ }
+} 
