@@ -26,6 +26,11 @@ def brute_force_pow(g, p, public):
 
     YOUR TASK.
     """
+    for x in range(p-1):
+        if pow(g, x, p) == public:
+            return x
+
+    return None
     raise NotImplementedError("brute_force_pow")
 
 
