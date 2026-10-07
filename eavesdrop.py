@@ -31,6 +31,7 @@ def brute_force_pow(g, p, public):
             return x
 
     return None
+
     raise NotImplementedError("brute_force_pow")
 
 
@@ -48,6 +49,14 @@ def brute_force_running(g, p, public):
 
     YOUR TASK.
     """
+    value = 1
+    for x in range(p-1):
+        if value == public:
+            return x
+        value = (value * g) % p
+
+    return None
+
     raise NotImplementedError("brute_force_running")
 
 
