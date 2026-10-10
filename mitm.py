@@ -47,7 +47,14 @@ class Mallory:
 
         YOUR TASK.
         """
-        raise NotImplementedError("swap_public")
+
+        # store the needed values in the secrets dictionary
+        self.secrets[message.sender] = dh.shared_secret(message.value, self.p, self.private)
+
+        # return the message object with its value field value being replaced by Mallory's public value
+        return replace(message, value=self.public)
+
+        #raise NotImplementedError("swap_public")
 
     def relay_text(self, message):
         """An encrypted message is travelling from message.sender to message.receiver.
@@ -58,7 +65,24 @@ class Mallory:
 
         YOUR TASK.
         """
-        raise NotImplementedError("relay_text")
+
+
+        # decrypt the secret message
+        plain_text = wire.decrypt(self.secrets[message.sender], message.value)
+
+        # save the sender, receiver, and the decrypted plaintext in the read list
+        self.read.append((message.sender, message.receiver, plain_text))
+
+        # invoke the rewrite function if it exists
+        if self.rewrite is not None:
+            plain_text = self.rewrite(plain_text)
+
+        # return the message object with the plaintext message that gets encrypted with the second shared secret
+        return replace(message, value=wire.encrypt(self.secrets[message.receiver], plain_text))
+
+
+
+        #raise NotImplementedError("relay_text")
 
 
 def attack(g, p, texts, rewrite=None):
