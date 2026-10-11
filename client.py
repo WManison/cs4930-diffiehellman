@@ -177,14 +177,10 @@ def solve_b(conn, team):
     # receive the result from the server
     flag_dict = conn.recv()
 
-    # print the details
-    print(flag_dict["detail"])
-
-    # print the flag
-    print(mallory.read[-1][2])
+    #return the message in plaintext
+    return mallory.read[-1][2]
 
     #raise NotImplementedError("solve_b")
-
 
 # Everything below is given.
 
