@@ -32,7 +32,56 @@ def solve_a(conn, team):
 
     YOUR TASK.
     """
-    raise NotImplementedError("solve_a")
+
+    # send the initial communication with the server
+    conn.send({
+        "msg": "hello",
+        "challenge": "A",
+        "team": team
+    })
+
+    # receive the server parameters
+    params = conn.recv()
+
+    # set the prime number and generator variables
+    g = int(params["g"])
+    p = int(params["p"])
+
+    # receive the dictionary containing the server's public value
+    public_value_dict = conn.recv()
+
+    # set a variable for the server's public value
+    server_public_value = int(public_value_dict["public"])
+
+    # generate an own private key
+    private_key = dh.generate_private(p)
+
+    # generate the shared secret
+    secret = dh.shared_secret(server_public_value, p, private_key)
+
+    # generate the public_key
+    public_key = dh.public_from(g, p, private_key)
+
+    # send the public key to the server
+    conn.send({
+        "msg": "public",
+        "public": str(public_key),
+    })
+
+    # recieve the encrypted dictionary that contains the flag
+    encrypted_dict = conn.recv()
+
+    # convert the hex value to a bytes object
+    cypher = bytes.fromhex(encrypted_dict["blob"])
+    print(cypher)
+
+    # decrypt the cypher
+    plain_text = wire.decrypt(secret, cypher)
+
+    return plain_text
+
+
+    #raise NotImplementedError("solve_a")
 
 
 def solve_b(conn, team):
@@ -47,7 +96,94 @@ def solve_b(conn, team):
 
     YOUR TASK.
     """
-    raise NotImplementedError("solve_b")
+
+    # send the initial communication with the server
+    conn.send({
+        "msg": "hello",
+        "challenge": "B",
+        "team": team
+    })
+
+    # receive the server parameters
+    params = conn.recv()
+
+    # set the prime number and generator variables
+    g = int(params["g"])
+    p = int(params["p"])
+
+    # create a Mallory object
+    mallory = mitm.Mallory(g, p)
+
+    # receive the dictionary containing Ava's public value
+    public_value_dict = conn.recv()
+
+    # set a public value variable
+    received_public_value = int(public_value_dict["public"])
+
+    # create a message object to send to Ben
+    message_data = wire.Message("public", "Ava", "Ben", received_public_value)
+
+    # swap the public values
+    new_message = mallory.intercept(message_data)
+
+    # send the intercepted message to the server
+    conn.send({
+        "msg": "public",
+        "from": "Ava",
+        "to": "Ben",
+        "public": str(new_message.value)
+    })
+
+    # receive Ben's response
+    ben_message = conn.recv()
+
+    # set a public value variable
+    received_public_value = int(ben_message["public"])
+
+    # create a message object to send to Ava
+    message_data = wire.Message("public", "Ben", "Ava", received_public_value)
+
+    # swap the public values
+    new_message = mallory.intercept(message_data)
+
+    # send the intercepted message to the server
+    conn.send({
+        "msg": "public",
+        "from": "Ben",
+        "to": "Ava",
+        "public": str(new_message.value)
+    })
+
+    # recieve the encrypted dictionary that contains Ava's message
+    encrypted_dict = conn.recv()
+
+    # convert the hex value to a bytes object
+    cypher = bytes.fromhex(encrypted_dict["blob"])
+
+    # create a message object for the message data
+    message_data = wire.Message("text", "Ava", "Ben", cypher)
+
+    # dcrypt and save the data, and then rencrypt it for Ben
+    message_to_relay = mallory.intercept(message_data)
+
+    # send the relayed message to Ben
+    conn.send({
+        "msg": "text",
+        "from": "Ava",
+        "to": "Ben",
+        "blob": message_to_relay.value.hex()
+    })
+
+    # receive the result from the server
+    flag_dict = conn.recv()
+
+    # print the details
+    print(flag_dict["detail"])
+
+    # print the flag
+    print(mallory.read[-1][2])
+
+    #raise NotImplementedError("solve_b")
 
 
 # Everything below is given.
