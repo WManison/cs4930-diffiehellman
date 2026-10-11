@@ -73,7 +73,6 @@ def solve_a(conn, team):
 
     # convert the hex value to a bytes object
     cypher = bytes.fromhex(encrypted_dict["blob"])
-    print(cypher)
 
     # decrypt the cypher
     plain_text = wire.decrypt(secret, cypher)
