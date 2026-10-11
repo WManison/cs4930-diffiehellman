@@ -48,7 +48,7 @@ class Mallory:
         YOUR TASK.
         """
 
-        # store the needed values in the secrets dictionary
+        # calculate and store the shared secret
         self.secrets[message.sender] = dh.shared_secret(message.value, self.p, self.private)
 
         # return the message object with its value field value being replaced by Mallory's public value
